@@ -1,11 +1,21 @@
 import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
-import jsoncity from '../json/city.list.json';
+import jsc from '../json/city.list.json';
 interface City{
   id:number;
   name:string
 }
-class Settings extends React.Component<{},{data:City[],selected:City|null}> {
+interface Ville{
+  id:number,
+  name:string,
+  state:string,
+  country:string,
+  coord:{
+    lon:number,
+    lat:number
+  }
+}
+class Settings extends React.Component<{},{data:Ville[],selected:City|null}> {
   constructor(props: {}) {
     super(props)
     this.state = {
@@ -21,14 +31,16 @@ class Settings extends React.Component<{},{data:City[],selected:City|null}> {
     this.setState({
       data: [],
     })
-    var ex: City[] = []
-    for (let i = 0; i < Object.values(jsoncity).length; i++) {
-      if (Object.values(jsoncity)[i]['name'].toUpperCase().startsWith(e.toUpperCase())) {
+    var ex: Ville[] = []
+    var temp :Ville[]= []
+    var jsoncity : Ville[] = Object.values(jsc) as Ville[]   
+    for (let i = 0; i < jsoncity.length; i++) {
+      if (jsoncity[i]['name'].toUpperCase().startsWith(e.toUpperCase())) {
         if (ex.length >= 20) {
           break;
         }
         else {
-          let res: City = Object.values(jsoncity)[i]
+          let res: Ville = jsoncity[i]
           ex.push(res)
         }
       }
