@@ -2,8 +2,52 @@ import { IonLoading, IonLabel, IonRippleEffect, IonItem, IonList, IonButton, Ion
 import React from 'react';
 import './weather.css'
 import jsoncity from '../json/city.list.json';
+interface City{
+  coord:{
+    long:number,
+    lat:number
+  },
+  weather:[
+    {
+      id:number,
+      main:string,
+      description:string,
+      icon:string
+    }
+  ]
+,
+base:string,
+main:{
+  temp:number,
+  feels_like:number,
+  temp_min:number,
+  temp_max:number,
+  pressure:number,
+  humidity:number
+},
+visibility:number,
+wind:{
+  speed:number,
+  deg:number
+},
+clouds:{
+  all:number
+},
+dt:number,
+sys:{
+  type:number,
+  id:number,
+  country:string,
+  sunrise:number,
+  sunset:number
+},
+timezone:number,
+id:number,
+name:string,
+cod:number
+  }
 
-class Weather extends React.Component {
+class Weather extends React.Component<{},{data:[],result:City|null,connectionError:boolean,encours:boolean,find:string}> {
   constructor(props: {}) {
     super(props)
     this.state = {
@@ -40,13 +84,13 @@ class Weather extends React.Component {
       result: null
     })
     var temp = []
-    for (let i = 0; i < jsoncity.length; i++) {
-      if (jsoncity[i]['name'].toUpperCase().startsWith(e.toUpperCase())) {
+    for (let i = 0; i < Object.values(jsoncity).length; i++) {
+      if (Object.values(jsoncity)[i]['name'].toUpperCase().startsWith(e.toUpperCase())) {
         if (temp.length >= 20) {
           break;
         }
         else {
-          temp.push(jsoncity[i])
+          temp.push(Object.values(jsoncity)[i])
         }
       }
     };
@@ -54,14 +98,14 @@ class Weather extends React.Component {
       temp = []
     }
     this.setState({
-      data: temp
+      data: temp as []
     })
   }
   componentDidMount(): void {
 
 
     if (sessionStorage.getItem('defaultCityId') != null) {
-      this.getWeather(parseInt(sessionStorage.getItem('defaultCityId')))
+      this.getWeather(parseInt(sessionStorage.getItem('defaultCityId')!))
     }
   }
   render(): React.ReactNode {
@@ -86,7 +130,7 @@ class Weather extends React.Component {
               </IonItem>
             ))}
           </IonList>}
-          {(this.state.data.length == 0 && this.state.find != "") && <IonItem>
+          {(this.state.data.length === 0 && this.state.find !== "") && <IonItem>
             <IonLabel>No result found</IonLabel>
           </IonItem>}
           {(this.state.result !== null && <IonContent className='vertical-center'>

@@ -5,12 +5,12 @@ interface City{
   id:number;
   name:string
 }
-class Settings extends React.Component {
+class Settings extends React.Component<{},{data:City[],selected:City|null}> {
   constructor(props: {}) {
     super(props)
     this.state = {
       data: [],
-      selected:{}
+      selected:null
     }
   }
   setSelected(id:number,name:string){
@@ -22,13 +22,13 @@ class Settings extends React.Component {
       data: [],
     })
     var ex: City[] = []
-    for (let i = 0; i < jsoncity.length; i++) {
-      if (jsoncity[i]['name'].toUpperCase().startsWith(e.toUpperCase())) {
+    for (let i = 0; i < Object.values(jsoncity).length; i++) {
+      if (Object.values(jsoncity)[i]['name'].toUpperCase().startsWith(e.toUpperCase())) {
         if (ex.length >= 20) {
           break;
         }
         else {
-          let res: City = jsoncity[i]
+          let res: City = Object.values(jsoncity)[i]
           ex.push(res)
         }
       }
@@ -55,9 +55,9 @@ class Settings extends React.Component {
             <IonInput   onIonChange={(e:any) => this.find(e.target.value)}></IonInput>
           </IonItem>
           <IonItem><IonLabel>Current : {sessionStorage.getItem('defaultCityName')}</IonLabel></IonItem>
-          <IonItem><IonLabel>Selected : {this.state.selected['name']}</IonLabel></IonItem>
-          <IonButton expand='full' onClick={()=>{sessionStorage.setItem('defaultCityId',this.state.selected['id'])
-        sessionStorage.setItem('defaultCityName',this.state.selected['name'])
+          <IonItem><IonLabel>Selected : {this.state.selected!['name']}</IonLabel></IonItem>
+          <IonButton expand='full' onClick={()=>{sessionStorage.setItem('defaultCityId',this.state.selected!['id'].toString())
+        sessionStorage.setItem('defaultCityName',this.state.selected!['name'])
         }} >Save changes</IonButton>
           {(this.state.data.length > 0) && <IonList>
             {this.state.data.map(({ id, name }) => (
