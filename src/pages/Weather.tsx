@@ -53,7 +53,7 @@ interface Ville{
   state:string,
   country:string,
   coord:{
-    long:number,
+    lon:number,
     lat:number
   }
 }
