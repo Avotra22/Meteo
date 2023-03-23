@@ -11,6 +11,8 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { settings, partlySunny } from 'ionicons/icons';
+import Weather from './pages/Weather';
+import Settings from './pages/Settings';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -39,7 +41,33 @@ setupIonicReact();
 class App extends React.Component {
   render(): React.ReactNode {
     return (
-      <></>
+      <IonApp>
+        <IonReactRouter>
+          <IonTabs>
+            <IonRouterOutlet>
+              <Route exact path="/Weather">
+                <Weather />
+              </Route>
+              <Route exact path="/Settings">
+                <Settings />
+              </Route>
+              <Route exact path="/">
+                <Redirect to="/Weather" />
+              </Route>
+            </IonRouterOutlet>
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="Weather" href="/Weather">
+                <IonIcon icon={partlySunny} />
+
+              </IonTabButton>
+              <IonTabButton tab="Settings" href="/Settings">
+                <IonIcon icon={settings} />
+
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
+        </IonReactRouter>
+      </IonApp>
     )
   }
 }
