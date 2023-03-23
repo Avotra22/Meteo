@@ -1,4 +1,15 @@
 # Meteo
-#to launch this project, just run the ionic serve command in cmd, then go to the browser and go to the address given by the cmd (example: http://localhost:8102)
-#to search for a city, just tap on the find a city field and it will suggest cities when you tap on the field, and to display the weather for this city, just click it
-#You can configure a city as default by going to the setting tab then search for the city you want to set as default and then tap on the save changes button, the city you have chosen will be the default city
+Installing Ionic:
+
+To install Ionic, you must have Node.js and npm installed on your system. Open a console and run the following command:
+    npm install -g @ionic/cli
+
+Project execution:
+
+To run the project, go to the root of your project, open a console and run the following command:
+    ionic serve
+
+User Manual:
+
+To display the weather of a city, you can search for a city by tapping on the field "Find a city", write the name of the city and it will suggest cities, when you have found the city you are looking for, you can click it to display these meteo.
+You can configure a city as default by going to the setting tab then search for the name of your city then select then press the save button change to save it.
