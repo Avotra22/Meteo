@@ -1,4 +1,4 @@
-import { IonLoading, IonLabel, IonRippleEffect, IonItem, IonList, IonButton, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonToast } from '@ionic/react';
+import { IonLoading, IonLabel, IonItem, IonList, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonToast } from '@ionic/react';
 import React from 'react';
 import './weather.css'
 import jsc from '../json/city.list.json';
