@@ -57,7 +57,7 @@ class Settings extends React.Component<{},{data:City[],selected:City|null}> {
           <IonItem><IonLabel>Current : {sessionStorage.getItem('defaultCityName')}</IonLabel></IonItem>
           <IonItem><IonLabel>Selected : {(this.state.selected!=null?this.state.selected!['name']:null ) }</IonLabel></IonItem>
           <IonButton expand='full' onClick={()=>{sessionStorage.setItem('defaultCityId',(this.state.selected!=null?this.state.selected['id'].toString():""))
-        sessionStorage.setItem('defaultCityName',(this.state.selected!=null?this.state.selected!['name']:""))
+        sessionStorage.setItem('defaultCityName',(this.state.selected!=null?this.state.selected['name']:""))
         }} >Save changes</IonButton>
           {(this.state.data.length > 0) && <IonList>
             {this.state.data.map(({ id, name }) => (

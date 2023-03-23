@@ -1,7 +1,7 @@
 import { IonLoading, IonLabel, IonRippleEffect, IonItem, IonList, IonButton, IonInput, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonImg, IonToast } from '@ionic/react';
 import React from 'react';
 import './weather.css'
-import jsoncity from '../json/city.list.json';
+import jsc from '../json/city.list.json';
 interface City{
   coord:{
     long:number,
@@ -46,8 +46,18 @@ id:number,
 name:string,
 cod:number
   }
-
-class Weather extends React.Component<{},{data:[],result:City|null,connectionError:boolean,encours:boolean,find:string}> {
+  
+interface Ville{
+  id:number,
+  name:string,
+  state:string,
+  country:string,
+  coord:{
+    long:number,
+    lat:number
+  }
+}
+class Weather extends React.Component<{},{data:Ville[],result:City|null,connectionError:boolean,encours:boolean,find:string}> {
   constructor(props: {}) {
     super(props)
     this.state = {
@@ -78,19 +88,23 @@ class Weather extends React.Component<{},{data:[],result:City|null,connectionErr
 
   }
   find(e: string) {
+    //console.log(Object.values(jsoncity));
+    
     this.setState({
       data: [],
       find: e,
       result: null
     })
-    var temp = []
-    for (let i = 0; i < Object.values(jsoncity).length; i++) {
-      if (Object.values(jsoncity)[i]['name'].toUpperCase().startsWith(e.toUpperCase())) {
-        if (temp.length >= 20) {
+    var temp :Ville[]= []
+    var jsoncity : Ville[] = Object.values(jsc)    
+    for (let i = 0; i < jsoncity.length; i++) {
+      var t : Ville = jsoncity[i]
+      if (t['name'].toUpperCase().startsWith(e.toUpperCase())) {
+        if (temp.length >= 10) {
           break;
         }
         else {
-          temp.push(Object.values(jsoncity)[i])
+          temp.push(t)
         }
       }
     };
@@ -98,7 +112,7 @@ class Weather extends React.Component<{},{data:[],result:City|null,connectionErr
       temp = []
     }
     this.setState({
-      data: temp as []
+      data: temp
     })
   }
   componentDidMount(): void {
