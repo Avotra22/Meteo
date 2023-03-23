@@ -52,7 +52,7 @@ class Settings extends React.Component {
       <IonContent fullscreen>
       <IonItem>
       <IonLabel position='fixed'>Default city</IonLabel>
-            <IonInput   onIonChange={(e) => this.find(e.target.value)}></IonInput>
+            <IonInput   onIonChange={(e:any) => this.find(e.target.value)}></IonInput>
           </IonItem>
           <IonItem><IonLabel>Current : {sessionStorage.getItem('defaultCityName')}</IonLabel></IonItem>
           <IonItem><IonLabel>Selected : {this.state.selected['name']}</IonLabel></IonItem>

@@ -76,7 +76,7 @@ class Weather extends React.Component {
         <IonContent fullscreen>
           <IonItem>
             <IonLabel position='fixed'>Find a city</IonLabel>
-            <IonInput id='input' onIonChange={(e) => this.find(e.target.value)}></IonInput>
+            <IonInput id='input' onIonChange={(e:any) => this.find(e.target.value)}></IonInput>
           </IonItem>
           {(this.state.data.length > 0) && <IonList>
             {this.state.data.map(({ id, name }) => (
