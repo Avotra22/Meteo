@@ -96,7 +96,7 @@ class Weather extends React.Component<{},{data:Ville[],result:City|null,connecti
       result: null
     })
     var temp :Ville[]= []
-    var jsoncity : Ville[] = Object.values(jsc)    
+    var jsoncity : Ville[] = Object.values(jsc) as Ville[]   
     for (let i = 0; i < jsoncity.length; i++) {
       var t : Ville = jsoncity[i]
       if (t['name'].toUpperCase().startsWith(e.toUpperCase())) {
